@@ -1,0 +1,249 @@
+📘 Java Notes — Topic 1: Introduction to Java
+
+Great plan! Learning topic-by-topic with this format will make revision very easy later. I'll follow the correct learning order, and I'll always mention prerequisites so nothing feels disconnected.
+
+Let's start from the very beginning.
+
+1️⃣ Definition
+
+Java is a high-level, object-oriented programming language that is:
+
+Platform-independent (write once, run anywhere)
+Compiled + Interpreted — your code is first compiled into an intermediate form called bytecode, and then that bytecode is run by the JVM (Java Virtual Machine).
+
+Prerequisite: None. This is your starting point. 🎉
+
+2️⃣ Why It Is Used
+Used to build desktop apps, web apps, Android apps, enterprise systems, backend servers.
+Platform independence means the same compiled code runs on Windows, Linux, or Mac without changes.
+Object-Oriented — makes large programs organized, reusable, and easier to maintain.
+Strongly typed and has automatic memory management (Garbage Collection) — you don't manually free memory like in C/C++.
+
+3️⃣ Syntax (Basic Program Structure)
+
+Every Java program needs at least one class, and execution starts from the main method.
+
+java
+
+public class ClassName {
+    public static void main(String[] args) {
+        // your code goes here
+    }
+}
+
+Key rule: If the class is public, the file name must match the class name exactly (including capitalization).
+Example: class HelloWorld → file must be named HelloWorld.java
+
+4️⃣ Example
+java
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+
+🔎 Line-by-line explanation:
+
+Line	Explanation
+public class HelloWorld	Declares a class named HelloWorld. public means it's accessible from anywhere.
+{	Start of the class body.
+public static void main(String[] args)	The main method — entry point of every Java program. JVM looks for this exact signature to start running the code.
+static	Means this method belongs to the class itself, not to an object — so JVM can call it without creating an object first.
+void	Means this method doesn't return any value.
+String[] args	Allows you to pass command-line arguments (an array of text values) when running the program.
+System.out.println("Hello, World!");	Prints the text to the console, and moves to a new line after.
+} }	Closing braces for method and class.
+
+🎯 Output Prediction:
+Hello, World!
+
+5️⃣ Real-Time Example
+
+Think of Java like a universal recipe book:
+
+You write the recipe (source code) once.
+The recipe is translated into a standard instruction format (bytecode).
+Any kitchen (Windows/Linux/Mac) with the right "chef" (JVM) can read and cook the same recipe — no rewriting needed.
+
+Real apps built with Java: Android apps, banking software, e-commerce backends (like large-scale order processing systems), enterprise tools.
+
+6️⃣ Important Points to Remember
+Java file extension: .java
+Compiled file extension: .class (bytecode)
+Java is case-sensitive → Main ≠ main
+Every statement ends with a semicolon ;
+Code blocks are wrapped in curly braces { }
+main method signature must be exactly: public static void main(String[] args)
+
+7️⃣ Common Mistakes (Beginners)
+
+❌ Forgetting semicolon ; at the end of a statement
+❌ File name not matching the public class name
+❌ Writing Main instead of main (Java is case-sensitive)
+❌ Forgetting String[] args in the main method signature
+❌ Using System.out.Println instead of System.out.println (wrong capitalization)
+
+8️⃣ Short Summary
+
+Java is a platform-independent, object-oriented language. Every program has a class and a main method, which is where execution starts. Code is compiled to bytecode and run by the JVM, allowing it to run on any operating system.
+
+9️⃣ Practice Questions
+
+What is the difference between source code and bytecode in Java?
+Why must the public class name match the file name?
+What will happen if you remove static from the main method? (Think about it — we'll confirm the answer when we cover methods.)
+Write a Java program to print your name and your favorite hobby on two separate lines.
+What does System.out.println() do, and how is it different from System.out.print()?
+
+🔧 Extra Add-ons
+🟢 Simple explanation:
+
+Java code → compiled into bytecode → JVM runs that bytecode on any machine.
+
+🔵 Slightly advanced explanation:
+
+JDK, JRE, and JVM work together like this:
+
+Component	Full Form	Role
+JDK	Java Development Kit	Used to write and compile code. Includes compiler (javac) + JRE.
+JRE	Java Runtime Environment	Used to run Java programs. Includes JVM + libraries.
+JVM	Java Virtual Machine	Actually executes the bytecode. Makes Java platform-independent.
+
+📌 Relationship: JDK ⊃ JRE ⊃ JVM (JDK contains JRE, JRE contains JVM)
+
+💼 Interview Perspective:
+"What is platform independence in Java, and how is it achieved?" → Answer using bytecode + JVM concept.
+"Difference between JDK, JRE, and JVM?" → Very commonly asked — use the table above.
+
+📘 Java Notes — Topic 2: Variables and Data Types
+
+Prerequisite: Topic 1 (Introduction to Java) — you should know the basic program structure and where the main method goes, because that's exactly where we'll write our variables.
+
+1️⃣ Definition
+A variable is a named container in memory that stores a value which can change during program execution.
+A data type tells Java what kind of value the variable will hold (number, text, true/false, etc.) and how much memory to reserve for it.
+2️⃣ Why It Is Used
+Programs need to store and reuse data — like a user's age, name, price of an item, etc.
+Data types help Java:
+Allocate the correct amount of memory
+Prevent invalid operations (e.g., you can't accidentally add text to a number without conversion)
+Catch errors at compile time rather than while the program is running
+3️⃣ Syntax
+java
+dataType variableName = value;
+
+Examples of declaration:
+
+java
+int age;              // declaration only
+age = 25;              // assignment
+int marks = 90;        // declaration + assignment (initialization)
+4️⃣ Example
+java
+public class VariableDemo {
+    public static void main(String[] args) {
+        int age = 20;
+        double price = 99.99;
+        char grade = 'A';
+        boolean isPassed = true;
+        String name = "Rahul";
+
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Price: " + price);
+        System.out.println("Grade: " + grade);
+        System.out.println("Passed: " + isPassed);
+    }
+}
+🔎 Line-by-line explanation:
+Line	Explanation
+int age = 20;	Declares an integer variable age and stores whole number 20.
+double price = 99.99;	Declares a decimal (floating-point) variable to store money/price values.
+char grade = 'A';	Declares a single character — note single quotes for char.
+boolean isPassed = true;	Stores only true or false.
+String name = "Rahul";	Stores text — note double quotes for String. (String is technically a class, not a primitive — more on that later.)
+"Name: " + name	The + here joins (concatenates) text and variable value into one printable line.
+🎯 Output Prediction:
+Name: Rahul
+Age: 20
+Price: 99.99
+Grade: A
+Passed: true
+5️⃣ Real-Time Example
+
+Think of variables like labeled boxes:
+
+Box Label (Variable)	Box Type (Data Type)	What's Inside
+age	int	20
+price	double	99.99
+isPassed	boolean	true
+
+Real-world use: In a shopping app, productPrice (double), quantity (int), isInStock (boolean), and productName (String) are all variables holding different types of data about one product.
+
+🧮 Java's 8 Primitive Data Types (Table)
+Data Type	Size	Stores	Example
+byte	1 byte	Small whole numbers (-128 to 127)	byte b = 100;
+short	2 bytes	Bigger whole numbers	short s = 5000;
+int	4 bytes	Standard whole numbers	int a = 100000;
+long	8 bytes	Very large whole numbers	long l = 15000000000L;
+float	4 bytes	Decimal numbers (less precision)	float f = 5.75f;
+double	8 bytes	Decimal numbers (more precision)	double d = 19.99;
+char	2 bytes	Single character	char c = 'X';
+boolean	1 bit (JVM-dependent)	true / false	boolean flag = false;
+
+📌 String is not a primitive type — it's a class (object) in Java. We'll cover it in detail separately, but you'll use it a lot from now on.
+
+6️⃣ Important Points to Remember
+Variable names are case-sensitive: age ≠ Age
+Variable names cannot start with a number and cannot contain spaces
+long values need an L suffix, float values need an f suffix
+char uses single quotes 'A', String uses double quotes "A"
+Java is statically typed — once you declare a type, you can't store a different type in it later
+Naming convention: use camelCase for variables → studentName, totalMarks
+7️⃣ Common Mistakes (Beginners)
+
+❌ Using double quotes for char → char c = "A"; (wrong — causes error)
+❌ Forgetting f suffix for float → float f = 5.75; (this is actually a double by default, causes error when assigned to float)
+❌ Forgetting L suffix for large long values
+❌ Declaring a variable but never initializing it, then trying to use it (Java won't allow using uninitialized local variables)
+❌ Mixing data types incorrectly, e.g., int x = 5.5; (decimal into int — not allowed without explicit conversion)
+❌ Starting variable names with numbers: int 1value = 5; (invalid)
+
+8️⃣ Short Summary
+
+A variable is a named memory location to store data, and its data type defines what kind of value it can hold and how much memory it uses. Java has 8 primitive data types (byte, short, int, long, float, double, char, boolean) plus reference types like String. Java is statically typed, so type mismatches are caught at compile time.
+
+9️⃣ Practice Questions
+Declare a variable to store your height in centimeters using the most appropriate data type.
+What will happen if you write: int marks = "90";? Why?
+Write a program that stores your name, age, and whether you are a student (true/false), then prints all of them.
+What's the difference between float and double? Which one is more precise?
+Predict the output:
+java
+   int x = 10;
+   double y = 5.5;
+   System.out.println(x + y);
+
+(Hint: think about type promotion.)
+
+🔧 Extra Add-ons
+🟢 Simple explanation:
+
+A variable is a box, the data type tells you what can go inside the box (numbers, text, true/false).
+
+🔵 Slightly advanced explanation:
+
+Java performs implicit type promotion in expressions — when int and double are used together (like x + y above), the int is automatically converted to double before the operation. This is called widening conversion, and it happens automatically without data loss. The reverse (double → int) requires explicit casting and can lose data.
+
+java
+double result = x + y;   // int x is auto-promoted to double
+int z = (int) y;          // explicit cast — decimal part is lost (narrowing)
+🔄 Comparison with Previous Topic (Topic 1 → Topic 2)
+Topic 1: Program Structure	Topic 2: Variables
+Told JVM where to start (main method)	Tells JVM what data to work with
+Structural — class, method	Data-focused — values, memory
+No data was stored	Now we store real data (numbers, text)
+💼 Interview Perspective:
+"Is Java pass-by-value or pass-by-reference?" (relates to how variables are stored/passed — we'll revisit this deeply in Methods)
+"Difference between float and double?" — precision and default type of decimal literals
+"Why is String not a primitive type?" — good follow-up question once you learn about Strings/Objects
