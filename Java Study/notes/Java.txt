@@ -104,10 +104,13 @@ Java code → compiled into bytecode → JVM runs that bytecode on any machine.
 
 JDK, JRE, and JVM work together like this:
 
-Component	Full Form	Role
-JDK	Java Development Kit	Used to write and compile code. Includes compiler (javac) + JRE.
-JRE	Java Runtime Environment	Used to run Java programs. Includes JVM + libraries.
-JVM	Java Virtual Machine	Actually executes the bytecode. Makes Java platform-independent.
+----------------------------------------------------------------------------------------------------------------------------
+Component	           Full Form	                                            Role
+----------------------------------------------------------------------------------------------------------------------------
+  JDK	            Java Development Kit	                Used to write and compile code. Includes compiler (javac) + JRE.
+  JRE	            Java Runtime Environment	            Used to run Java programs. Includes JVM + libraries.
+  JVM	            Java Virtual Machine	                Actually executes the bytecode. Makes Java platform-independent.
+----------------------------------------------------------------------------------------------------------------------------    
 
 📌 Relationship: JDK ⊃ JRE ⊃ JVM (JDK contains JRE, JRE contains JVM)
 
@@ -122,22 +125,24 @@ Prerequisite: Topic 1 (Introduction to Java) — you should know the basic progr
 1️⃣ Definition
 A variable is a named container in memory that stores a value which can change during program execution.
 A data type tells Java what kind of value the variable will hold (number, text, true/false, etc.) and how much memory to reserve for it.
+
 2️⃣ Why It Is Used
 Programs need to store and reuse data — like a user's age, name, price of an item, etc.
 Data types help Java:
-Allocate the correct amount of memory
-Prevent invalid operations (e.g., you can't accidentally add text to a number without conversion)
-Catch errors at compile time rather than while the program is running
+    Allocate the correct amount of memory
+    Prevent invalid operations (e.g., you can't accidentally add text to a number without conversion)
+    Catch errors at compile time rather than while the program is running
+
 3️⃣ Syntax
 java
 dataType variableName = value;
 
 Examples of declaration:
-
 java
-int age;              // declaration only
+int age;               // declaration only
 age = 25;              // assignment
 int marks = 90;        // declaration + assignment (initialization)
+
 4️⃣ Example
 java
 public class VariableDemo {
@@ -163,6 +168,7 @@ char grade = 'A';	Declares a single character — note single quotes for char.
 boolean isPassed = true;	Stores only true or false.
 String name = "Rahul";	Stores text — note double quotes for String. (String is technically a class, not a primitive — more on that later.)
 "Name: " + name	The + here joins (concatenates) text and variable value into one printable line.
+
 🎯 Output Prediction:
 Name: Rahul
 Age: 20
@@ -173,23 +179,30 @@ Passed: true
 
 Think of variables like labeled boxes:
 
+--------------------------------------------------------------
 Box Label (Variable)	Box Type (Data Type)	What's Inside
-age	int	20
-price	double	99.99
-isPassed	boolean	true
+--------------------------------------------------------------
+    age	                    int	                    20
+    price	                double	                99.99
+    isPassed	            boolean	                true
+--------------------------------------------------------------
 
 Real-world use: In a shopping app, productPrice (double), quantity (int), isInStock (boolean), and productName (String) are all variables holding different types of data about one product.
 
 🧮 Java's 8 Primitive Data Types (Table)
-Data Type	Size	Stores	Example
-byte	1 byte	Small whole numbers (-128 to 127)	byte b = 100;
-short	2 bytes	Bigger whole numbers	short s = 5000;
-int	4 bytes	Standard whole numbers	int a = 100000;
-long	8 bytes	Very large whole numbers	long l = 15000000000L;
-float	4 bytes	Decimal numbers (less precision)	float f = 5.75f;
-double	8 bytes	Decimal numbers (more precision)	double d = 19.99;
-char	2 bytes	Single character	char c = 'X';
-boolean	1 bit (JVM-dependent)	true / false	boolean flag = false;
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Data Type	   Size	          Stores	                     Example                      Range              
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+byte	      1 byte	  Small whole numbers                  byte b = 100;            (-128 to 127)	            
+short	      2 bytes	  Bigger whole numbers	               short s = 5000;          (-32,768 to 32,767)        
+int	          4 bytes	  Standard whole numbers	           int a = 100000;          (-2,147,483,648 to 2,147,483,647)       
+long	      8 bytes	  Very large whole numbers	           long l = 15000000000L;   (-9,223,372,036,854,775,808 to 9,223,372,036,854,775,807)      
+float	      4 bytes	  Decimal numbers (less precision)	   float f = 5.75f;         (~±1.4×10⁻⁴⁵ to ±3.4×10³⁸ (≈6-7 significant decimal digits))     
+double	      8 bytes	  Decimal numbers (more precision)	   double d = 19.99;        (~±4.9×10⁻³²⁴ to ±1.7×10³⁰⁸ (≈15-16 significant decimal digits))      
+char	      2 bytes	  Single character	                   char c = 'X';            (0 to 65,535 (unsigned) — represents a single Unicode character)      
+boolean	      1 bit 	  true / false	                       boolean flag = false;    (true or false only)     
+          (JVM-dependent)
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 📌 String is not a primitive type — it's a class (object) in Java. We'll cover it in detail separately, but you'll use it a lot from now on.
 
@@ -200,6 +213,7 @@ long values need an L suffix, float values need an f suffix
 char uses single quotes 'A', String uses double quotes "A"
 Java is statically typed — once you declare a type, you can't store a different type in it later
 Naming convention: use camelCase for variables → studentName, totalMarks
+
 7️⃣ Common Mistakes (Beginners)
 
 ❌ Using double quotes for char → char c = "A"; (wrong — causes error)
@@ -238,6 +252,7 @@ Java performs implicit type promotion in expressions — when int and double are
 java
 double result = x + y;   // int x is auto-promoted to double
 int z = (int) y;          // explicit cast — decimal part is lost (narrowing)
+
 🔄 Comparison with Previous Topic (Topic 1 → Topic 2)
 Topic 1: Program Structure	Topic 2: Variables
 Told JVM where to start (main method)	Tells JVM what data to work with
@@ -247,3 +262,160 @@ No data was stored	Now we store real data (numbers, text)
 "Is Java pass-by-value or pass-by-reference?" (relates to how variables are stored/passed — we'll revisit this deeply in Methods)
 "Difference between float and double?" — precision and default type of decimal literals
 "Why is String not a primitive type?" — good follow-up question once you learn about Strings/Objects
+
+
+📘 Java Notes — Topic 3: Type Casting & Type Conversion
+
+Prerequisite: Topic 2 (Variables and Data Types) — you must know the different data types (int, double, float, long, char, etc.) and their sizes, because casting is all about converting between these types.
+
+1️⃣ Definition
+Type casting/conversion means converting a value from one data type to another.
+Two types exist in Java:
+1. Implicit Conversion (Widening) — done automatically by Java, small type → big type, no data loss.
+2. Explicit Conversion (Narrowing) — done manually by the programmer, big type → small type, possible data loss.
+
+2️⃣ Why It Is Used
+Sometimes you need to combine or use values of different types together (e.g., add an int and a double).
+Sometimes you need to fit a bigger value into a smaller variable (e.g., store a calculated double result as a whole number int).
+Prevents Java from throwing type-mismatch compile-time errors when done correctly.
+
+3️⃣ Syntax
+
+Implicit (Widening) — automatic:
+
+java
+int a = 10;
+double b = a;   // int automatically becomes double, no cast needed
+
+Explicit (Narrowing) — manual cast required:
+
+java
+double x = 9.7;
+int y = (int) x;   // must specify (int) to force conversion
+
+General syntax for explicit casting:
+
+java
+DataType variableName = (DataType) valueToConvert;
+
+4️⃣ Example
+java
+public class TypeCastingDemo {
+    public static void main(String[] args) {
+        // Implicit (Widening) conversion
+        int num = 100;
+        double bigNum = num;
+        System.out.println("Widening: " + bigNum);
+
+        // Explicit (Narrowing) conversion
+        double price = 199.99;
+        int roundedPrice = (int) price;
+        System.out.println("Narrowing: " + roundedPrice);
+
+        // char to int (implicit)
+        char ch = 'A';
+        int asciiValue = ch;
+        System.out.println("ASCII value of A: " + asciiValue);
+
+        // int to char (explicit)
+        int num2 = 66;
+        char ch2 = (char) num2;
+        System.out.println("Character for 66: " + ch2);
+    }
+}
+
+🔎 Line-by-line explanation:
+Line	Explanation
+int num = 100;	A whole number stored as int.
+double bigNum = num;	Java automatically widens int → double. No data lost since double can represent 100 exactly.
+double price = 199.99;	A decimal value.
+int roundedPrice = (int) price;	We explicitly cast double → int. This truncates (chops off) the decimal part — it does NOT round. So 199.99 becomes 199, not 200.
+char ch = 'A';	Characters are internally stored as numbers (Unicode/ASCII values).
+int asciiValue = ch;	char → int is implicit widening, since every character has a corresponding numeric code. 'A' = 65.
+int num2 = 66;	A plain integer.
+char ch2 = (char) num2;	Explicit cast — converts number back into its corresponding character. 66 → 'B'.
+
+🎯 Output Prediction:
+Widening: 100.0
+Narrowing: 199
+ASCII value of A: 65
+Character for 66: B
+
+⚠️ Notice: roundedPrice is 199, not 200 — casting truncates, it does not round!
+
+5️⃣ Real-Time Example
+Think of type casting like pouring liquid between containers:
+Widening (implicit) = pouring water from a small cup into a big jug → nothing spills, totally safe, Java does it automatically.
+Narrowing (explicit) = pouring water from a big jug into a small cup → some water spills out (data loss), so Java makes you manually confirm you're okay with that by writing (int).
+Real-world scenario: A billing app calculates totalAmount = 1499.75 (double) but you want to display only the whole rupee amount without decimals for a summary — you'd cast it to int, knowing you'll lose the paise/cents.
+
+📊 Widening vs Narrowing (Table)
+--------------------------------------------------------------------------------------------------------
+	                        Widening (Implicit)	                Narrowing (Explicit)
+--------------------------------------------------------------------------------------------------------
+Direction	             Small type → Big type	            Big type → Small type
+Cast keyword needed?	    ❌ No	                         ✅ Yes, e.g. (int)
+Data loss?	                ❌ No	                         ⚠️ Possible
+Done by?	             Java automatically	                Programmer manually
+Example	                 int → long → float → double	    double → float → long → int → short → byte
+--------------------------------------------------------------------------------------------------------
+
+6️⃣ Important Points to Remember
+Casting double/float to int truncates decimals — it does NOT round off.
+char can be implicitly converted to int (since chars have numeric Unicode values), but int to char needs explicit casting.
+boolean cannot be cast to/from any other data type in Java (no numeric relationship).
+Widening order: byte → short → int → long → float → double (also char → int works)
+Narrowing always needs (targetType) syntax.
+Very large values cast into smaller types can produce unexpected/overflowed results — not just truncation.
+
+7️⃣ Common Mistakes (Beginners)
+❌ Assuming (int) 9.9 rounds to 10 — it actually gives 9 (truncation, not rounding)
+❌ Forgetting the cast when narrowing → compile-time error:
+
+java
+double d = 5.5;
+int x = d;   // ❌ Error: incompatible types
+
+❌ Trying to cast boolean to int (not allowed in Java, unlike some other languages):
+
+java
+boolean flag = true;
+int x = (int) flag;   // ❌ Compile-time error
+
+❌ Casting a very large int/long into a byte/short and getting a weird/overflowed value, without realizing why.
+❌ Confusing type casting with String conversion (e.g., converting int to String uses different methods — String.valueOf() or + "", not (String) casting).
+
+8️⃣ Short Summary
+Type casting converts a value from one data type to another. Widening (implicit) happens automatically when going from a smaller to a larger type, with no data loss. Narrowing (explicit) requires manual casting with (type) syntax when going from a larger to a smaller type, and may lose data through truncation.
+
+9️⃣ Practice Questions
+Predict the output:
+java
+   double d = 7.9;
+   int x = (int) d;
+   System.out.println(x);
+
+Convert int num = 300; into a byte. What value do you expect, and why might it be surprising? (Hint: byte range is -128 to 127 — research "overflow" if curious, we'll cover it more later.)
+
+Write a program that takes a char letter, converts it to its numeric (ASCII) value, and prints both.
+Why doesn't Java allow casting boolean to int, unlike some other languages?
+What is the difference between implicit and explicit conversion? Give one real-life example of each.
+
+🔧 Extra Add-ons
+
+🟢 Simple explanation:
+Small box fits into a big box automatically (widening). Big box into small box needs you to squeeze it manually with (type) — and something might not fit (narrowing).
+
+🔵 Slightly advanced explanation:
+Under the hood, narrowing conversions from floating-point to integer types in Java follow IEEE 754 truncation rules — they discard the fractional part (round toward zero), not the nearest whole number. Also, when narrowing an int/long into a smaller integer type like byte, Java doesn't just "chop off" the value — it performs a modulo-based bit-level truncation, which is why values can appear to "wrap around" unexpectedly (e.g., (byte) 130 gives -126, not an error).
+
+🔄 Comparison with Previous Topic (Topic 2 → Topic 3)
+Topic 2: Variables & Data Types	Topic 3: Type Casting
+Defines what type a variable is	Defines how to change that type
+Static — type fixed once declared	Dynamic — value's type can be converted for use
+Mistake: int x = 5.5; causes error	Solves that error: int x = (int) 5.5;
+
+💼 Interview Perspective:
+"What is the difference between implicit and explicit type casting?" — very common basic Java interview question.
+"Does casting a double to int round or truncate?" — a classic trick question (answer: truncates).
+"Can you cast boolean to int in Java?" — tests if you know Java differs from C/C++ here.
