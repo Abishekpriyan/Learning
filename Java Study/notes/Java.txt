@@ -419,3 +419,189 @@ Mistake: int x = 5.5; causes error	Solves that error: int x = (int) 5.5;
 "What is the difference between implicit and explicit type casting?" — very common basic Java interview question.
 "Does casting a double to int round or truncate?" — a classic trick question (answer: truncates).
 "Can you cast boolean to int in Java?" — tests if you know Java differs from C/C++ here.
+
+📘 Java Notes — Topic 4: Operators in Java
+
+Prerequisite: Topic 2 (Variables & Data Types) and Topic 3 (Type Casting) — operators work on variables, and some operators automatically trigger the widening conversions you just learned (e.g., int + double results in a double).
+
+1️⃣ Definition
+An operator is a special symbol that performs an operation on one or more values (called operands) and produces a result.
+Example: In 5 + 3, + is the operator, and 5 and 3 are the operands.
+
+2️⃣ Why It Is Used
+To perform calculations (math), comparisons (decision-making), and logical checks (combining conditions).
+Almost every real program needs operators — calculating totals, checking eligibility, validating conditions, etc.
+They form the backbone of conditional statements and loops, which you'll learn next.
+
+3️⃣ Syntax
+java
+result = operand1 operator operand2;
+
+Example:
+
+java
+int sum = a + b;
+boolean isEqual = (a == b);
+🧮 Types of Operators (Table Overview)
+Category	Operators	Purpose
+Arithmetic	+ - * / %	Math calculations
+Relational (Comparison)	== != > < >= <=	Compare two values, result is boolean
+Logical	&& || !	Combine multiple boolean conditions
+Assignment	= += -= *= /= %=	Assign or update variable values
+Unary	+ - ++ --	Operate on a single operand
+Bitwise (advanced, we'll cover separately later)	& | ^ ~ << >>	Operate at bit level
+4️⃣ Example
+java
+public class OperatorsDemo {
+    public static void main(String[] args) {
+        int a = 10, b = 3;
+
+        // Arithmetic Operators
+        System.out.println("Sum: " + (a + b));
+        System.out.println("Difference: " + (a - b));
+        System.out.println("Product: " + (a * b));
+        System.out.println("Quotient: " + (a / b));
+        System.out.println("Remainder: " + (a % b));
+
+        // Relational Operators
+        System.out.println("Is a > b? " + (a > b));
+        System.out.println("Is a == b? " + (a == b));
+
+        // Logical Operators
+        boolean x = true, y = false;
+        System.out.println("AND: " + (x && y));
+        System.out.println("OR: " + (x || y));
+        System.out.println("NOT x: " + (!x));
+
+        // Assignment & Unary
+        int c = 5;
+        c += 3;   // same as c = c + 3
+        System.out.println("c after += 3: " + c);
+
+        int d = 5;
+        d++;      // increment by 1
+        System.out.println("d after increment: " + d);
+    }
+}
+🔎 Line-by-line explanation:
+Line	Explanation
+int a = 10, b = 3;	Declares two integers on the same line, separated by a comma.
+a / b	Integer division — since both a and b are int, the result 10 / 3 is 3 (decimal part is dropped, not rounded).
+a % b	Modulus operator — gives the remainder of division. 10 % 3 = 1.
+a > b	Relational operator — returns boolean (true since 10 > 3).
+a == b	Checks equality (not assignment!) — returns false.
+x && y	Logical AND — true only if both are true. Here false since y is false.
+x || y	Logical OR — true if at least one is true. Here true since x is true.
+!x	Logical NOT — flips the boolean. !true = false.
+c += 3;	Shorthand for c = c + 3; — compound assignment.
+d++;	Increments d by 1 — shorthand for d = d + 1;
+🎯 Output Prediction:
+Sum: 13
+Difference: 7
+Product: 30
+Quotient: 3
+Remainder: 1
+Is a > b? true
+Is a == b? false
+AND: false
+OR: true
+NOT x: false
+c after += 3: 8
+d after increment: 6
+5️⃣ Real-Time Example
+
+Think of a shopping cart checkout system:
+
+Arithmetic: totalPrice = itemPrice * quantity — calculates the bill
+Relational: if (cartTotal >= 500) — checks if eligible for free delivery
+Logical: if (isMember && cartTotal > 1000) — checks if user is a member AND cart qualifies, for a special discount
+Assignment: walletBalance -= totalPrice — deducts amount after payment
+⚠️ Special Focus: ++ and -- (Pre vs Post)
+
+This confuses almost every beginner, so let's dedicate proper attention to it.
+
+java
+int a = 5;
+int b = a++;   // POST-increment: use a's current value FIRST, then increment
+System.out.println("a = " + a + ", b = " + b);
+
+int x = 5;
+int y = ++x;   // PRE-increment: increment FIRST, then use the value
+System.out.println("x = " + x + ", y = " + y);
+🎯 Output Prediction:
+a = 6, b = 5
+x = 6, y = 6
+	a++ (Post)	++a (Pre)
+Order	Use old value → then increment	Increment → then use new value
+Value assigned	Old value	New value
+6️⃣ Important Points to Remember
+= is assignment, == is comparison — this is the #1 beginner confusion.
+Integer division (int / int) drops the decimal, doesn't round. To get a decimal result, at least one operand must be double/float.
+% (modulus) works on integers and decimals both, and gives the remainder.
+&& and || use short-circuit evaluation — if the first condition already determines the result, Java doesn't even check the second one (efficiency trick).
+Operator precedence matters: *, /, % are evaluated before +, - (similar to normal math rules — use parentheses to be safe and clear).
+7️⃣ Common Mistakes (Beginners)
+
+❌ Using = instead of == in comparisons:
+
+java
+if (a = 5) { }   // ❌ Compile-time error in Java (good — Java protects you here, unlike some languages)
+
+❌ Expecting 5 / 2 to give 2.5 — it actually gives 2 (integer division)
+
+java
+System.out.println(5 / 2);       // 2, not 2.5
+System.out.println(5.0 / 2);     // 2.5 — correct, because 5.0 is a double
+
+❌ Confusing a++ and ++a — leads to wrong values in complex expressions
+❌ Forgetting operator precedence, e.g.:
+
+java
+int result = 2 + 3 * 2;   // = 8, NOT 10 (multiplication happens first)
+
+❌ Dividing by zero with integers → throws a runtime error (ArithmeticException), while dividing by zero with doubles gives Infinity (no crash)
+
+8️⃣ Short Summary
+
+Operators perform actions on values — arithmetic for math, relational for comparisons (returns boolean), logical for combining conditions, and assignment for storing/updating values. Watch out for integer division (drops decimals), = vs ==, and the pre/post increment difference — these are the most common beginner traps.
+
+9️⃣ Practice Questions
+Predict the output:
+java
+   int a = 7, b = 2;
+   System.out.println(a / b);
+   System.out.println(a % b);
+   System.out.println((double) a / b);
+What is the difference between a++ and ++a? Write a small example showing both giving different results.
+Predict the output:
+java
+   int x = 10;
+   boolean result = (x > 5) && (x < 20);
+   System.out.println(result);
+Why does Java throw a compile-time error for if (a = 5) but not for if (a == 5)?
+Write a program to check if a number is even or odd using the modulus operator.
+🔧 Extra Add-ons
+🟢 Simple explanation:
+
+Operators are symbols that "do something" with values — add them, compare them, or combine true/false checks.
+
+🔵 Slightly advanced explanation:
+
+Short-circuit evaluation in && and ||:
+
+java
+if (a != 0 && (10 / a > 2)) { }
+
+Here, if a == 0, Java never evaluates 10 / a because && already knows the result is false once the first condition fails. This prevents a potential ArithmeticException (division by zero). This is a deliberate and useful Java behavior, not just a shortcut.
+
+🔄 Comparison with Previous Topic (Topic 3 → Topic 4)
+Topic 3: Type Casting	Topic 4: Operators
+Converts types of values	Performs actions on values
+Manual/automatic conversion	Combines values to produce a new result
+Example: (int) 5.5	Example: 5 + 3, a > b
+Relevant here: int/int division truncates just like narrowing casts do	Builds on that — integer arithmetic often needs casting to get decimal precision
+💼 Interview Perspective:
+"What's the difference between == and .equals()?" — a very common trick question (we'll cover .equals() properly once we reach Strings/Objects).
+"Explain short-circuit evaluation with an example." — frequently asked.
+"What is operator precedence? Give an example where it changes the result." — tests fundamental understanding.
+"Difference between a++ and ++a?" — extremely common basic Java question.
